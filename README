@@ -1,0 +1,15 @@
+To Assemble First Stage BootSect: 'nasm -f bin bootsect00.asm -o MBR_BOOT.BIN'
+	First Stage [BINARY] Image does not have to be named "MBR_BOOT.BIN" it can really be anything as it will be written to first sector
+	of our volume/media drive :)
+
+To Assemble Second Stage BootSect: 'nasm -f bin bootsect01.asm -o BOOTSECT.BIN'
+	Second Stage [BINARY] Image HAS TO BE NAMED "BOOTSECT.BIN" if it's not named so, first stage will not be able to locate second stage!
+
+
+I'm using Linux for my development platform so I used 'dd' command to preform reads/writes and used 'hexedit' to check reads against writes...
+
+To write to volume/media drive: 'dd if='MBR_BOOT.BIN' of=/dev/sdb bs=512 count=1'
+
+Then you can simply copy and paste 'BOOTSECT.BIN' directly to the newly created partition...
+
+NOTE: '/dev/sdb' is to be set to whatever drive you may write to! I do not take any responsibilty for any damage you may cause for incorrectly setting write value!
